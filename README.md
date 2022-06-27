@@ -1,2 +1,12 @@
-# Ploidy
-Simulation of ploidy evolution
+## Simulation of ploidy evolution from 
+Raynes Y, Weinreich DM (2021). *“Sign inversion in selection on ploidy”*. **bioRxiv doi.org/10.1101/2021.10.26.465943**
+
+Simulation description from the manuscript
+
+We model asexual, clonally reproducing populations of constant size, *N* evolving in discrete, non-overlapping generations. Populations are composed of genetic lineages defined by ploidy state and the number of beneficial and deleterious mutations. Each new beneficial mutation increases an individual’s fitness by a constant sb; a new deleterious mutation reduces fitness by a constant sd. We assume that fitness effects are additive and calculate the fitness of a haploid lineage with x beneficial and y deleterious mutations as wxy = 1+xsb-ysd. We also assume that in the absence of recombination fitness-affecting mutations in diploids remain permanently heterozygous (at least on the time scale of our simulations) and calculate the fitness of a diploid lineage with x beneficial and y deleterious mutations as wxy=1+xhbsb-yhdsd, where hb and hd are the corresponding dominance coefficients.
+
+At the outset of simulation, a single individual of a particular ploidy (either haploid or diploid) is introduced to a population of N-1 individuals of the other ploidy. Both the invading lineage of size 1 and the resident lineage of size N-1 bear no fitness-affecting mutations and, thus, have an initial fitness w = 1. Every generation the population reproduces according to the Wright-Fisher model with the size of the lineage carrying x beneficial mutations and y deleterious mutation in generation t+1 randomly sampled from a multinomial distribution with expectation Nft·wxy/w̅ where N is the size of the population, ft is the frequency of the lineage in generation t, wxy is the fitness of the lineage as defined above and w̅ is the average fitness of the population. Upon reproduction, each surviving lineage acquires a random number of beneficial and deleterious mutations drawn from a Poisson distribution with expectation given by, respectively, cNiUb and cNiUd. Here, c is the ploidy of the lineage (i.e., number of chromosome copies), Ni is the size of the lineage, Ub is the per-individual beneficial mutation rate, and Ud is the per-individual deleterious mutation rate. Diploids, thus, have a 2-fold higher mutation rate than haploids. 
+ 
+Simulations end when the invader either fixes (reaches a frequency of 1.0) or is eliminated from the population. We assess the fixation probably (Pfix) as the frequency with which the invader supplants the resident across the replicate runs of the simulation. Throughout, we focus on NPfix - the fixation probability normalized by the neutral expectation, 1/N. To ascertain whether an invading ploidy variant is favored or disfavored by selection we compare its NPfix to that expected of a neutral mutation, i.e., NPfix = 1.
+
+	Simulation code was written in Julia 1.2.
